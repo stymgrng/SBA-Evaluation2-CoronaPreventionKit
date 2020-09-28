@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome to Corona-Kit Home...</h1>
+<h1>Welcome to Corona-Kit Home Page</h1>
 <hr/>
 <a href="${pageContext.request.contextPath}/custom-login"><input type="button" value="Login" /></a>
 <hr/>

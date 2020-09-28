@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Something has gone wrong or you have entered the wrong details!!</title>
 </head>
 <body>
-<h1>Un-Authorized Access...</h1>
+<h1>Un-Authorized Access</h1>
 <a href="${pageContext.request.contextPath}/">HOME</a>
 </body>
 </html>

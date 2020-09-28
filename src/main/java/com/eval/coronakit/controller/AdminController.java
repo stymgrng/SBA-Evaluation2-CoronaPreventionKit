@@ -1,6 +1,8 @@
 package com.eval.coronakit.controller;
 
+import java.util.List;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.eval.coronakit.entity.ProductMaster;
 import com.eval.coronakit.service.ProductService;
 
@@ -21,32 +22,44 @@ public class AdminController {
 
 	@Autowired
 	ProductService productService;
-	
+
 	@GetMapping("/home")
 	public String home() {
-		return null;
+		return "admin-home";
 	}
-	
+
 	@GetMapping("/product-entry")
 	public String productEntry(Model model) {
-		
-		return null;
+		ProductMaster product = new ProductMaster();
+		model.addAttribute("product", product);
+		return "add-new-item";
 	}
-	
+
 	@PostMapping("/product-save")
-	public String productSave(@ModelAttribute ProductMaster product, BindingResult result ) {
-		return null;
+	public String productSave(@Valid @ModelAttribute("product") ProductMaster product, BindingResult result) {
+		
+		if (result.hasErrors())
+			return "add-new-item";
+		
+		productService.addNewProduct(product);
+		return "redirect:product-list";
 	}
-	
 
 	@GetMapping("/product-list")
 	public String productList(Model model) {
-		return null;
+
+		List<ProductMaster> list = productService.getAllProducts();
+		model.addAttribute("productList", list);
+		return "show-all-item-admin";
+
 	}
-	
+
 	@GetMapping("/product-delete/{productId}")
 	public String productDelete(@PathVariable("productId") int productId) {
-		return null;
+		
+		productService.deleteProduct(productId);
+		return "redirect:/admin/product-list";
+		
 	}
-	
+
 }
